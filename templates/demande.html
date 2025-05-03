@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Demandes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .back-button {
+            margin-top: 20px;
+        }
+        .back-button a {
+            text-decoration: none;
+            background-color: #555;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        .back-button a:hover {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Liste des demandes</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Nom de l'utilisateur</th>
+            <th>Titre du livre</th>
+            <th>Date de la demande</th>
+            <th>Statut</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for request in requests %}
+        <tr>
+            <td>{{ request.user.username }}</td>
+            <td>{{ request.book.title }}</td>
+            <td>{{ request.request_date.strftime('%d/%m/%Y') }}</td>
+            <td>{{ request.status }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="back-button">
+    <a href="{{ url_for('admin_dashboard') }}">Retour au tableau de bord</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Liste des livres</h2>
+    <form method="GET" action="{{ url_for('list_books') }}">
+        <input type="text" name="search" placeholder="Rechercher un livre" value="{{ search }}">
+        <button type="submit">Rechercher</button>
+    </form>
+    
+    <p>
+        Trier par :
+        <a href="{{ url_for('list_books', sort_by='title', search=search) }}" {% if sort_by == 'title' %}style="font-weight: bold;"{% endif %}>Titre</a> |
+        <a href="{{ url_for('list_books', sort_by='author', search=search) }}" {% if sort_by == 'author' %}style="font-weight: bold;"{% endif %}>Auteur</a>
+    </p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Titre</th>
+                <th>Auteur</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td>{{ book.id }}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% if not books %}
+        <p>Aucun livre trouvé pour votre recherche.</p>
+    {% endif %}
+{% endblock %}

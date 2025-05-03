@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de bord Client</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #2C3E50;
+        }
+        h2, h3 {
+            color: #34495E;
+        }
+        p {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .book-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .book-item {
+            background-color: #ecf0f1;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .book-item a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        .book-item a:hover {
+            text-decoration: underline;
+        }
+        .logout-link {
+            display: inline-block;
+            background-color: #e74c3c;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+        .logout-link:hover {
+            background-color: #c0392b;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Tableau de bord du Client</h1>
+
+        <p>Bienvenue, <strong>{{ current_user.username }}</strong> !</p>
+
+        <h2>Liste des livres</h2>
+        <ul class="book-list">
+            {% for book in books %}
+                <li class="book-item">
+                    <span>{{ book.title }} par {{ book.author }}</span>
+                    <a href="{{ url_for('borrow_book', book_id=book.id) }}">Emprunter</a>
+                </li>
+            {% else %}
+                <li class="book-item">Aucun livre disponible.</li>
+            {% endfor %}
+        </ul>
+
+        <!-- Nouveau bouton pour voir les emprunts -->
+        <a href="{{ url_for('list_borrows') }}" class="btn">Voir mes emprunts</a>
+
+        <a href="{{ url_for('logout') }}" class="logout-link">Se déconnecter</a>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de bord Administrateur</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        input[type="number"] {
+            width: 100px;
+            padding: 5px;
+            text-align: center;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .message {
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #e7f4e7;
+            border: 1px solid #4CAF50;
+            color: #4CAF50;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Tableau de bord Administrateur</h1>
+
+<div style="margin-bottom: 20px;">
+    <a href="{{ url_for('loan_requests') }}">
+        <button style="margin-right: 10px;">Voir les demandes d'emprunt</button>
+    </a>
+    <a href="{{ url_for('logout') }}">
+        <button style="background-color: #f44336;">Se déconnecter</button>
+    </a>
+</div>
+
+
+<h2>Liste des livres</h2>
+
+{% if messages %}
+    <div class="message">
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<form method="POST">
+    <table>
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Auteur</th>
+                <th>Nombre d'exemplaires</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>
+                    <label for="available_{{ book.id }}">Exemplaires:</label>
+                    <input 
+                        type="number" 
+                        id="available_{{ book.id }}" 
+                        name="available_{{ book.id }}" 
+                        value="{{ book.available }}" 
+                        min="0" 
+                        required>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button type="submit" name="update_all" style="margin-top: 20px;">Mettre à jour tous les livres</button>
+
+</form>
+
+
+</body>
+</html>

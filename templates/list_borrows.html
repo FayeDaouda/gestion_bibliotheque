@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes emprunts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #2C3E50;
+        }
+        .borrow-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .borrow-item {
+            background-color: #ecf0f1;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .back-link {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Vos emprunts</h1>
+
+    <ul class="borrow-list">
+        {% for borrow in borrows %}
+            <li class="borrow-item">
+                <span>{{ borrow.book.title }} - Emprunté le {{ borrow.borrow_date.strftime('%d/%m/%Y') }}
+                {% if borrow.return_date %}
+                    - Retouré le {{ borrow.return_date.strftime('%d/%m/%Y') }}
+                {% else %}
+                    - En cours
+                {% endif %}
+                </span>
+            </li>
+        {% else %}
+            <li>Aucun emprunt effectué.</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ url_for('client_dashboard') }}" class="back-link">Retour au tableau de bord</a>
+
+</body>
+</html>
