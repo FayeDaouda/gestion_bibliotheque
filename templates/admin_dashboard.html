@@ -53,14 +53,21 @@
 
 <h1>Tableau de bord Administrateur</h1>
 
-<div style="margin-bottom: 20px;">
-    <a href="{{ url_for('loan_requests') }}">
-        <button style="margin-right: 10px;">Voir les demandes d'emprunt</button>
-    </a>
-    <a href="{{ url_for('logout') }}">
-        <button style="background-color: #f44336;">Se déconnecter</button>
-    </a>
+<div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+   
+    <div>
+        <a href="{{ url_for('add_book') }}">
+            <button style="margin-right: 10px; background-color: #2196F3;">Ajouter un livre</button>
+        </a>
+        <a href="{{ url_for('loan_requests') }}">
+            <button style="margin-right: 10px;">Voir les demandes d'emprunt</button>
+        </a>
+        <a href="{{ url_for('logout') }}">
+            <button style="background-color: #f44336;">Se déconnecter</button>
+        </a>
+    </div>
 </div>
+
 
 
 <h2>Liste des livres</h2>

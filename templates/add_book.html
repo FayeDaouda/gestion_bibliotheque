@@ -1,14 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Ajouter un livre</h2>
-    <form action="/add_book" method="POST">
-        <label for="title">Titre :</label>
-        <input type="text" id="title" name="title" required><br><br>
+<div style="max-width: 500px; margin: 40px auto; padding: 30px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+    <h2 style="text-align: center; color: #333;">Ajouter un livre</h2>
+    <form action="{{ url_for('add_book') }}" method="POST">
+        <div style="margin-bottom: 20px;">
+            <label for="title" style="display: block; margin-bottom: 6px; font-weight: bold;">Titre :</label>
+            <input type="text" id="title" name="title" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+        </div>
 
-        <label for="author">Auteur :</label>
-        <input type="text" id="author" name="author" required><br><br>
+        <div style="margin-bottom: 20px;">
+            <label for="author" style="display: block; margin-bottom: 6px; font-weight: bold;">Auteur :</label>
+            <input type="text" id="author" name="author" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+        </div>
 
-        <button type="submit">Ajouter</button>
+        <button type="submit" style="width: 100%; background-color: #4CAF50; color: white; padding: 12px; border: none; border-radius: 4px; font-size: 16px; cursor: pointer;">Ajouter</button>
     </form>
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="{{ url_for('admin_dashboard') }}" style="color: #007BFF; text-decoration: none;">← Retour au tableau de bord</a>
+    </div>
+</div>
 {% endblock %}
